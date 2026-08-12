@@ -1,0 +1,98 @@
+Final alpha-grid convergence diagnostic
+
+R version: R version 3.4.3 (2017-11-30)
+Diagnostic seed: 20260816
+n: 500
+kappa: 0.10
+replications: 10
+parameter space: [-1,3]
+fine grid: seq(-1,3,by=.025); 161 points
+h=.05 and h=.10 were derived only as nested fine-grid subsets.
+All shared h=.05 entries inherit the exact evaluated alpha values from
+the previous resolution runner, including its h=.20 canonicalization.
+critical value: 5.99146454710798
+
+Previous h=.05 reproduction:
+rows compared: 7290
+max absolute W difference: 4.618527782440651e-14
+tolerance: 1e-12
+result: PASS
+
+fine-grid evaluations: 14490
+fine-grid numerical failures: 0
+lambda_bc generations: 30 (expected 30)
+all lambda reuse checks: TRUE
+accepted measures within [0,4]: TRUE
+
+h=.05 versus h=.025 by tau and estimator:
+ tau estimator  mean_absdiff_005_0025 median_absdiff_005_0025
+ 0.1 Oracle-GMM 0.01750               0.00625                
+ 0.1 Full-GMM   0.03500               0.02500                
+ 0.1 DML-IVQR   0.02250               0.02500                
+ 0.5 Oracle-GMM 0.01500               0.00000                
+ 0.5 Full-GMM   0.04750               0.02500                
+ 0.5 DML-IVQR   0.01375               0.01250                
+ 0.9 Oracle-GMM 0.00875               0.00000                
+ 0.9 Full-GMM   0.03000               0.01250                
+ 0.9 DML-IVQR   0.01125               0.00000                
+ max_absdiff_005_0025 component_count_changed_005 components_missed_005
+ 0.0750                7                          7                    
+ 0.0750                9                          1                    
+ 0.0625                4                          8                    
+ 0.1000                2                          0                    
+ 0.1375                7                          5                    
+ 0.0375                2                          1                    
+ 0.0250                2                          5                    
+ 0.1250               10                          4                    
+ 0.0375                4                          4                    
+ all_A_changed_005 any_accepted_changed_005 left_endpoint_changed_005
+ 1                 0                        0                        
+ 1                 0                        0                        
+ 0                 0                        0                        
+ 1                 0                        0                        
+ 0                 0                        0                        
+ 1                 0                        0                        
+ 0                 0                        0                        
+ 0                 0                        0                        
+ 0                 0                        0                        
+ right_endpoint_changed_005 numerical_failures fraction_absdiff_le_005
+ 0                          0                  0.9                    
+ 0                          0                  0.8                    
+ 0                          0                  0.9                    
+ 0                          0                  0.9                    
+ 0                          0                  0.7                    
+ 0                          0                  1.0                    
+ 0                          0                  1.0                    
+ 0                          0                  0.8                    
+ 0                          0                  1.0                    
+ fraction_absdiff_le_010 fraction_identical_all_A fraction_identical_components
+ 1.0                     0.9                      0.3                          
+ 1.0                     0.9                      0.1                          
+ 1.0                     1.0                      0.6                          
+ 0.9                     0.9                      0.8                          
+ 0.7                     1.0                      0.3                          
+ 1.0                     0.9                      0.8                          
+ 1.0                     1.0                      0.8                          
+ 0.9                     1.0                      0.0                          
+ 1.0                     1.0                      0.6                          
+
+Overall totals and numerical decision aids:
+profiles: 90
+mean absolute accepted-measure difference: 0.0223611111111111
+median absolute accepted-measure difference: 0.0124999999999997
+maximum absolute accepted-measure difference: 0.1375
+profiles with changed component count: 47
+fine components missed by h=.05: 35
+fine components missed by h=.10: 97
+all-A classification changes: 4
+any-accepted classification changes: 0
+left-endpoint classification changes: 0
+right-endpoint classification changes: 0
+fraction with absolute difference <= .05: 0.888888888888889
+fraction with absolute difference <= .10: 0.944444444444444
+fraction with identical all-A classification: 0.955555555555556
+fraction with identical component count: 0.477777777777778
+
+Overall validation: PASS
+These thresholds are descriptive decision aids only. No grid was selected
+automatically, and no smoothing, interpolation, coverage, or power was computed.

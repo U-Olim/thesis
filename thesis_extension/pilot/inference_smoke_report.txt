@@ -1,0 +1,55 @@
+Full-design inference smoke-test integration report
+
+R version: R version 3.4.3 (2017-11-30)
+Pilot seed: 20260817
+Replications: 3
+Sample sizes: 500, 1000
+Taus: 0.10, 0.25, 0.50, 0.75, 0.90
+Kappas: 1.00, 0.50, 0.25, 0.10
+Estimators: Oracle-GMM, Full-GMM, DML-IVQR
+Point grid: [-1,3], h=.10; points: 41
+CR grid: [-1,3], h=.05; points: 81
+Critical value: 5.99146454710798
+Power deltas: -0.5, -0.25, 0.25, 0.5
+
+Expected raw rows: 360
+Actual raw rows: 360
+Expected power rows: 1440
+Actual power rows: 1440
+Generated replication-n primitive datasets: 6
+
+Union-profile numerical failures: 0
+Raw rows with non-OK status: 0
+Coverage evaluation failures: 0
+Power evaluation failures: 0
+CR length failures: 0
+CR lengths outside [0,4]: 0
+
+Point-estimate left-boundary hits: 0
+Point-estimate right-boundary hits: 2
+CR left-boundary contacts: 127
+CR right-boundary contacts: 144
+CR all-A accepted: 29
+
+BC penalties generated: 30 (expected 30 )
+All BC reuse checks: TRUE
+All exact truth-union mapping checks: TRUE
+All exact power-union mapping checks: TRUE
+Truth-value validation: TRUE
+All power alternatives inside [-1,3]: TRUE
+Coverage was evaluated directly at exact alpha_true, not on CR_GRID.
+Power was evaluated directly at exact alpha_true + Delta, not on CR_GRID.
+
+Broad software-diagnostic ranges by estimator:
+ estimator  alpha_hat_range W_true_range                            
+ Oracle-GMM -0.9 to 2.9     0.01657902221786139 to 9.389268693072712
+ Full-GMM   -0.9 to 2.9     0.02106032510986481 to 25.88227526972036
+ DML-IVQR   -0.7 to 3       0.02384319765071528 to 18.69445403427006
+ CR_length_range
+ 0.2 to 4       
+ 0.35 to 4      
+ 0.25 to 4      
+
+Overall validation: PASS
+This is a three-replication integration smoke test. Coverage and power
+rates are not interpreted as substantive Monte Carlo findings.
