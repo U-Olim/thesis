@@ -1,0 +1,5 @@
+"estimator","test","n_common_alpha","max_abs_W_difference","mean_abs_W_difference","exact_match","tolerance_match","W_a0_alone","W_a0_after_lower","W_a0_after_higher"
+"DML-IVQR fixed CV","A_same_grid_same_rng",41,0,0,TRUE,TRUE,NA,NA,NA
+"DML-IVQR fixed CV","B_extra_points_before",41,0,0,TRUE,TRUE,NA,NA,NA
+"DML-IVQR fixed CV","C_reversed_grid",41,0,0,TRUE,TRUE,NA,NA,NA
+"DML-IVQR fixed CV","D_single_alpha_positions",2,0,0,TRUE,TRUE,3.35572655410229,3.35572655410229,3.35572655410229

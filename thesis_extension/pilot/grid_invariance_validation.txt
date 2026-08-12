@@ -1,0 +1,60 @@
+W_N(alpha) grid-invariance diagnostic
+
+R version: R version 3.4.3 (2017-11-30)
+Diagnostic seed: 20260815
+n: 500
+kappa: 1.00
+tau: 0.50
+Numerical tolerance: 1e-12
+One fixed generated dataset was used for every evaluation.
+Grid values were canonicalized to one decimal so matched common alphas are
+bit-identical; this avoids comparing differing binary encodings from seq().
+Every compared profile was started from the same saved .Random.seed.
+No seed argument or fixed folds were added to cv.hqreg.
+
+Grid-invariance comparisons:
+  estimator                     test n_common_alpha max_abs_W_difference
+ Oracle-GMM     A_same_grid_same_rng             41   0.0000000000000000
+ Oracle-GMM    B_extra_points_before             41   0.0000000000000000
+ Oracle-GMM          C_reversed_grid             41   0.0000000000000000
+ Oracle-GMM D_single_alpha_positions              2   0.0000000000000000
+   Full-GMM     A_same_grid_same_rng             41   0.0000000000000000
+   Full-GMM    B_extra_points_before             41   0.0000000000000000
+   Full-GMM          C_reversed_grid             41   0.0000000000000000
+   Full-GMM D_single_alpha_positions              2   0.0000000000000000
+   DML-IVQR     A_same_grid_same_rng             41   0.0000000000000000
+   DML-IVQR    B_extra_points_before             41   8.9216282855571407
+   DML-IVQR          C_reversed_grid             41  10.4188565965348090
+   DML-IVQR D_single_alpha_positions              2   0.1647737717697195
+ mean_abs_W_difference exact_match tolerance_match
+    0.0000000000000000        TRUE            TRUE
+    0.0000000000000000        TRUE            TRUE
+    0.0000000000000000        TRUE            TRUE
+    0.0000000000000000        TRUE            TRUE
+    0.0000000000000000        TRUE            TRUE
+    0.0000000000000000        TRUE            TRUE
+    0.0000000000000000        TRUE            TRUE
+    0.0000000000000000        TRUE            TRUE
+    0.0000000000000000        TRUE            TRUE
+    2.6184089180981238       FALSE           FALSE
+    2.0107515471300030       FALSE           FALSE
+    0.1101880918339659       FALSE           FALSE
+
+W_N(1) by evaluation position:
+  estimator        W_a0_alone  W_a0_after_lower W_a0_after_higher
+ Oracle-GMM 6.405486806636828 6.405486806636828 6.405486806636828
+   Full-GMM 1.464117339485364 1.464117339485364 1.464117339485364
+   DML-IVQR 2.838039322077745 2.893641733975957 3.002813093847465
+
+Authors' example/dml_ivqr_hqreg.Rmd inspection:
+The example calls cv.hqreg(..., seed = 2021). It also uses example-specific
+arguments including nlambda, lambda, and cv_fold. The authors' replicated
+Monte Carlo hdm_quantile implementation does not pass a seed argument.
+The current dml_wn_profile mirrors the Monte Carlo implementation and also
+does not pass a seed argument.
+
+Warnings/errors captured: 0
+Details: none
+
+DML material grid/order dependence at tolerance: YES
+STOP: do not proceed to the weak-instrument wide-grid confidence-region pilot.

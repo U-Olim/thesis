@@ -1,0 +1,66 @@
+Deterministic-CV DML W_N(alpha) validation
+
+R version: R version 3.4.3 (2017-11-30)
+Grid diagnostic seed: 20260815
+Prior baseline dataset seed: 20260814
+cv.hqreg seed: 2021
+n: 500
+kappa: 1.00
+Grid-invariance tau: 0.50
+Tolerance: 1e-12
+Grid values were canonicalized to one decimal so common alphas are bit-identical.
+
+The DML-IVQR estimator, 5-fold cross-validation procedure, loss function,
+lambda-selection rule, orthogonal score, and GMM criterion are unchanged.
+The CV random partition is fixed with seed = 2021 so that W_N(a) at a given
+candidate value does not depend on the surrounding numerical alpha grid or
+its evaluation order.
+
+Grid-invariance results:
+         estimator                     test n_common_alpha max_abs_W_difference
+ DML-IVQR fixed CV     A_same_grid_same_rng             41                    0
+ DML-IVQR fixed CV    B_extra_points_before             41                    0
+ DML-IVQR fixed CV          C_reversed_grid             41                    0
+ DML-IVQR fixed CV D_single_alpha_positions              2                    0
+ mean_abs_W_difference exact_match tolerance_match
+                     0        TRUE            TRUE
+                     0        TRUE            TRUE
+                     0        TRUE            TRUE
+                     0        TRUE            TRUE
+
+W_N(1) by evaluation position:
+        W_a0_alone  W_a0_after_lower W_a0_after_higher
+ 3.355726554102286 3.355726554102286 3.355726554102286
+
+Direct CV partition/equivalent-result verification at alpha=1:
+Repeated seed=2021 CV result components identical: PASS
+Seeded CV matches explicit reconstructed fold.id result: PASS
+Reconstructed fold counts: 100, 100, 100, 100, 100
+Compared components: cve, cvse, lambda, lambda.min, lambda.1se, fit$beta.
+
+Prior stochastic versus fixed-CV DML alpha_hat:
+ dataset_id   n tau alpha_hat_stochastic alpha_hat_fixedcv difference n_alpha
+          1 500 0.1                 -0.4              -0.4        0.0      41
+          1 500 0.5                  0.9               0.8       -0.1      41
+          1 500 0.9                  2.2               2.4        0.2      41
+          2 500 0.1                  0.0              -0.1       -0.1      41
+          2 500 0.5                  1.0               1.0        0.0      41
+          2 500 0.9                  1.9               1.9        0.0      41
+          3 500 0.1                 -0.1               0.2        0.3      41
+          3 500 0.5                  1.2               1.2        0.0      41
+          3 500 0.9                  2.3               2.3        0.0      41
+ n_success n_failure
+        41         0
+        41         0
+        41         0
+        41         0
+        41         0
+        41         0
+        41         0
+        41         0
+        41         0
+
+Warnings/errors captured: 0
+Details: none
+
+Overall result: PASS

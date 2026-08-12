@@ -1,0 +1,13 @@
+"estimator","test","n_common_alpha","max_abs_W_difference","mean_abs_W_difference","exact_match","tolerance_match","W_a0_alone","W_a0_after_lower","W_a0_after_higher"
+"Oracle-GMM","A_same_grid_same_rng",41,0,0,TRUE,TRUE,NA,NA,NA
+"Oracle-GMM","B_extra_points_before",41,0,0,TRUE,TRUE,NA,NA,NA
+"Oracle-GMM","C_reversed_grid",41,0,0,TRUE,TRUE,NA,NA,NA
+"Oracle-GMM","D_single_alpha_positions",2,0,0,TRUE,TRUE,6.40548680663683,6.40548680663683,6.40548680663683
+"Full-GMM","A_same_grid_same_rng",41,0,0,TRUE,TRUE,NA,NA,NA
+"Full-GMM","B_extra_points_before",41,0,0,TRUE,TRUE,NA,NA,NA
+"Full-GMM","C_reversed_grid",41,0,0,TRUE,TRUE,NA,NA,NA
+"Full-GMM","D_single_alpha_positions",2,0,0,TRUE,TRUE,1.46411733948536,1.46411733948536,1.46411733948536
+"DML-IVQR","A_same_grid_same_rng",41,0,0,TRUE,TRUE,NA,NA,NA
+"DML-IVQR","B_extra_points_before",41,8.92162828555714,2.61840891809812,FALSE,FALSE,NA,NA,NA
+"DML-IVQR","C_reversed_grid",41,10.4188565965348,2.01075154713,FALSE,FALSE,NA,NA,NA
+"DML-IVQR","D_single_alpha_positions",2,0.16477377176972,0.110188091833966,FALSE,FALSE,2.83803932207775,2.89364173397596,3.00281309384746
