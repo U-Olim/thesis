@@ -1,0 +1,49 @@
+DML-IVQR descriptive instrument-strength calibration pilot
+
+R version: R version 3.4.3 (2017-11-30)
+Pilot seed: 20260813
+Replications per sample size: 100
+Sample sizes: 500, 1000
+Candidate kappa values: 1.00, 0.50, 0.25, 0.10
+Expected and observed design rows: 800
+
+Restricted regression: D(kappa) ~ 1 + X1 + ... + X10
+Unrestricted regression: D(kappa) ~ 1 + X1 + ... + X10 + Z1 + Z2
+Z1 and Z2 are the observed instruments, not latent z1 and z2.
+X1 through X10 are the controls used for this calibration.
+Primitive variables are generated once per replication and sample size.
+All kappa designs use the same primitives, observed instruments, controls, and w.
+
+kappa=1 exact baseline identity checks passed: 200
+Common-draw invariant checks passed: 800
+Manual and base-R nested-model F-statistics agreed for every successful row.
+Both partial-R2 formulas agreed for every successful row.
+
+Mean and median joint first-stage F-statistics:
+    n kappa      F_mean    F_median
+  500  1.00 104.4181476 101.1727725
+  500  0.50  19.5679373  18.7070130
+  500  0.25   5.1534712   4.7363176
+  500  0.10   1.6348879   1.2211528
+ 1000  1.00 211.4685153 212.8172625
+ 1000  0.50  40.3187594  38.6495996
+ 1000  0.25  10.3493853   9.8501598
+ 1000  0.10   2.4854298   2.0380109
+
+Mean and median partial R-squared:
+    n kappa partial_R2_mean partial_R2_median
+  500  1.00    0.2984670973      0.2935328109
+  500  0.50    0.0738551586      0.0713421271
+  500  0.25    0.0205842131      0.0190798717
+  500  0.10    0.0066342188      0.0049899764
+ 1000  1.00    0.2992634161      0.3013050528
+ 1000  0.50    0.0752535464      0.0726291847
+ 1000  0.25    0.0204613938      0.0195691992
+ 1000  0.10    0.0049932790      0.0041127234
+
+Failed design rows: 0
+Warnings captured: 0
+Warning details: none
+
+These statistics are used only to descriptively calibrate the simulation
+design. They are not treated as formal IVQR identification statistics.
