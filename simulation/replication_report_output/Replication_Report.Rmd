@@ -1,0 +1,426 @@
+---
+title: "Monte Carlo Replication of DML-IVQR"
+subtitle: "Comparison with Chen, Huang and Tien"
+output:
+  pdf_document:
+    toc: false
+    number_sections: false
+    fig_caption: true
+geometry: margin=1.7cm
+fontsize: 10pt
+header-includes:
+  - \usepackage{float}
+  - \usepackage{pdflscape}
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+  - \setlength{\floatsep}{8pt plus 2pt minus 2pt}
+  - \setlength{\intextsep}{8pt plus 2pt minus 2pt}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
+                      fig.align = 'center')
+```
+
+# Computational environment
+
+\begin{minipage}[t]{0.46\textwidth}
+\textbf{Authors' environment}
+
+\begin{tabular}{lr}
+\toprule
+Component & Version \\
+\midrule
+R        & 3.4.3 \\
+quantreg & 5.34 \\
+hdm      & 0.2.0 \\
+hqreg    & 1.4 \\
+mvtnorm  & 1.0-6 \\
+doSNOW   & 1.0.16 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.46\textwidth}
+\textbf{Replication environment}
+
+\begin{tabular}{lr}
+\toprule
+Component & Version \\
+\midrule
+R        & 4.6.1 \\
+quantreg & 6.1 \\
+hdm      & 0.3.2 \\
+hqreg    & 1.4.1 \\
+mvtnorm  & 1.4.2 \\
+doSNOW   & 1.0.20 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+
+# Monte Carlo design
+
+The Monte Carlo experiment evaluates whether DML-IVQR can recover quantile treatment effects in a high-dimensional setting with many control variables.
+
+The simulation uses two sample sizes:
+
+- \(n=500\)
+- \(n=1000\)
+
+For each sample size, 500 independent Monte Carlo replications are conducted. This gives 1,000 simulated samples in total.
+
+Each simulated dataset contains:
+
+- one outcome variable, \(Y_i\);
+- one endogenous treatment variable, \(D_i\);
+- two instruments, \(Z_{1i}\) and \(Z_{2i}\);
+- \(p=100\) control variables, \(X_{1i},\ldots,X_{100i}\).
+
+Only a small subset of the controls is relevant. The first seven controls enter the outcome equation directly, while ten controls are included in the oracle specification because some of them also enter the instrument equations. The remaining controls are irrelevant noise variables. The design therefore creates a high-dimensional but sparse model. :contentReference[oaicite:0]{index=0}
+
+## Data-generating process
+
+The two structural disturbances are jointly normally distributed:
+
+\[
+\begin{pmatrix}
+u_i \\
+\varepsilon_i
+\end{pmatrix}
+\sim
+N\left(
+\begin{pmatrix}
+0 \\
+0
+\end{pmatrix},
+\begin{pmatrix}
+1 & 0.3 \\
+0.3 & 1
+\end{pmatrix}
+\right).
+\]
+
+The correlation of \(0.3\) between \(u_i\) and \(\varepsilon_i\) creates endogeneity.
+
+The latent control variables and instrument shocks are independently drawn from standard normal distributions:
+
+\[
+x_{ji},z_{1i},z_{2i},v_{1i},v_{2i}\sim N(0,1).
+\]
+
+The observed control variables are transformed to the unit interval:
+
+\[
+X_{ji}=\Phi(x_{ji}),
+\]
+
+where \(\Phi(\cdot)\) is the standard normal cumulative distribution function.
+
+The treatment variable is generated as
+
+\[
+D_i=\Phi(z_{1i}+z_{2i}+\varepsilon_i).
+\]
+
+The two instruments are constructed as
+
+\[
+Z_{1i}
+=
+z_{1i}
++
+X_{2i}
++
+X_{3i}
++
+X_{4i}
++
+v_{1i},
+\]
+
+and
+
+\[
+Z_{2i}
+=
+z_{2i}
++
+X_{7i}
++
+X_{8i}
++
+X_{9i}
++
+X_{10i}
++
+v_{2i}.
+\]
+
+The outcome equation is
+
+\[
+Y_i
+=
+1
++
+D_i
++
+5X_{1i}
++
+5X_{2i}
++
+5X_{3i}
++
+5X_{4i}
++
+5X_{5i}
++
+5X_{6i}
++
+5X_{7i}
++
+D_i u_i.
+\]
+
+Because \(D_i\) is multiplied by \(u_i\), the treatment effect varies across the outcome distribution.
+
+## True quantile treatment effect
+
+The true structural effect at quantile \(\tau\) is
+
+\[
+\alpha_0(\tau)
+=
+1+\Phi^{-1}(\tau).
+\]
+
+The experiment evaluates
+
+\[
+\tau
+\in
+\{0.10,0.25,0.50,0.75,0.90\}.
+\]
+
+The corresponding true values are approximately:
+
+- \(\alpha_0(0.10)=-0.282\)
+- \(\alpha_0(0.25)=0.326\)
+- \(\alpha_0(0.50)=1.000\)
+- \(\alpha_0(0.75)=1.674\)
+- \(\alpha_0(0.90)=2.282\)
+
+For each quantile, the estimator searches over the grid
+
+\[
+\alpha
+\in
+[-1,3]
+\]
+
+in increments of \(0.1\).
+
+## Estimators
+
+The simulation compares four estimators:
+
+- **res-GMM:** oracle GMM using the ten relevant controls and residualizing the instruments on the controls;
+- **GMM:** oracle GMM using the ten relevant controls without residualizing the instruments;
+- **full-GMM:** GMM using all 100 controls without regularization;
+- **DML-IVQR:** the proposed regularized estimator for high-dimensional IVQR.
+
+## Performance measures
+
+Estimator performance is evaluated using root-mean-square error, mean absolute error, and bias.
+
+The root-mean-square error is
+
+\[
+\mathrm{RMSE}
+=
+\sqrt{
+\frac{1}{R}
+\sum_{r=1}^{R}
+\left(
+\hat\alpha_r-\alpha_0
+\right)^2
+}.
+\]
+
+The mean absolute error is
+
+\[
+\mathrm{MAE}
+=
+\frac{1}{R}
+\sum_{r=1}^{R}
+\left|
+\hat\alpha_r-\alpha_0
+\right|.
+\]
+
+Bias follows the sign convention used in the paper:
+
+\[
+\mathrm{BIAS}
+=
+\alpha_0
+-
+\overline{\hat\alpha}.
+\]
+
+## Purpose of the comparisons
+
+The three simulation tables answer different questions:
+
+- **Table 1:** Does residualizing the instruments on the controls improve efficiency?
+- **Table 2:** Does DML-IVQR outperform unregularized full-GMM and approach the oracle-GMM benchmark?
+- **Table 3:** How does the theoretically motivated Belloni-Chernozhukov penalty compare with five-fold cross-validation?
+
+# Table 1: Residualizing and non-residualizing Z on X
+
+## Authors
+
+```{r results='asis'}
+x <- read.csv(file.path('tables', 'table1_authors.csv'), check.names = FALSE)
+cat('\\begingroup\\scriptsize\n')
+print(knitr::kable(x, format = 'latex', booktabs = TRUE,
+                   row.names = FALSE, align = c('l', rep('r', 6))))
+cat('\\endgroup\n')
+```
+
+## Replication
+
+```{r results='asis'}
+x <- read.csv(file.path('tables', 'table1_replication.csv'), check.names = FALSE)
+cat('\\begingroup\\scriptsize\n')
+print(knitr::kable(x, format = 'latex', booktabs = TRUE,
+                   row.names = FALSE, align = c('l', rep('r', 6))))
+cat('\\endgroup\n')
+```
+
+**Comparison.** Both sets of results show that residualizing the instruments reduces RMSE and MAE relative to non-residualized GMM, with the largest gains at the tail quantiles and in the smaller sample.
+
+# Table 2: IVQR with high-dimensional controls
+
+## Authors
+
+```{r results='asis'}
+x <- read.csv(file.path('tables', 'table2_authors.csv'), check.names = FALSE)
+cat('\\begingroup\\scriptsize\n')
+print(knitr::kable(x, format = 'latex', booktabs = TRUE, longtable = TRUE,
+                   row.names = FALSE, align = c('l','l','r','r','r')))
+cat('\\endgroup\n')
+```
+
+\clearpage
+## Replication
+
+```{r results='asis'}
+x <- read.csv(file.path('tables', 'table2_replication.csv'), check.names = FALSE)
+cat('\\begingroup\\scriptsize\n')
+print(knitr::kable(x, format = 'latex', booktabs = TRUE, longtable = TRUE,
+                   row.names = FALSE, align = c('l','l','r','r','r')))
+cat('\\endgroup\n')
+```
+
+**Comparison.** In both the authors' results and the replication, DML-IVQR substantially outperforms unregularized full-GMM and lies much closer to the infeasible oracle-GMM benchmark. RMSE generally decreases when the sample size rises from 500 to 1000.
+
+# Table 3: Choice of penalty
+
+## Authors
+
+```{r results='asis'}
+x <- read.csv(file.path('tables', 'table3_authors.csv'), check.names = FALSE)
+cat('\\begingroup\\scriptsize\n')
+print(knitr::kable(x, format = 'latex', booktabs = TRUE,
+                   row.names = FALSE, align = c('l', rep('r', 6))))
+cat('\\endgroup\n')
+```
+
+## Replication
+
+```{r results='asis'}
+x <- read.csv(file.path('tables', 'table3_replication.csv'), check.names = FALSE)
+cat('\\begingroup\\scriptsize\n')
+print(knitr::kable(x, format = 'latex', booktabs = TRUE,
+                   row.names = FALSE, align = c('l', rep('r', 6))))
+cat('\\endgroup\n')
+```
+
+**Comparison.** The Belloni-Chernozhukov and five-fold cross-validation procedures produce broadly similar finite-sample performance in both sets of results.
+
+# Figure 1: Distribution of estimates
+
+## Authors
+
+```{r, out.width='86%'}
+knitr::include_graphics(file.path('figures', 'figure1_authors.png'))
+```
+
+## Replication
+
+```{r, out.width='86%'}
+knitr::include_graphics(file.path('figures', 'figure1_replication.png'))
+```
+
+**Comparison.** Both figures show that DML-IVQR estimates are more concentrated around the true quantile effect than full-GMM estimates, particularly in the tails.
+
+\newpage
+
+## Figure 2: Median, $\tau=0.50$
+
+**Authors**
+
+```{r, out.width='88%'}
+knitr::include_graphics(file.path('figures', 'figure2_authors.png'))
+```
+
+**Replication**
+
+```{r, out.width='88%'}
+knitr::include_graphics(file.path('figures', 'figure2_replication.png'))
+```
+
+## Figure 3: Lower quantile, $\tau=0.25$
+
+**Authors**
+
+```{r, out.width='88%'}
+knitr::include_graphics(file.path('figures', 'figure3_authors.png'))
+```
+
+**Replication**
+
+```{r, out.width='88%'}
+knitr::include_graphics(file.path('figures', 'figure3_replication.png'))
+```
+
+## Figure 4: Upper quantile, $\tau=0.75$
+
+**Authors**
+
+```{r, out.width='88%'}
+knitr::include_graphics(file.path('figures', 'figure4_authors.png'))
+```
+
+**Replication**
+
+```{r, out.width='88%'}
+knitr::include_graphics(file.path('figures', 'figure4_replication.png'))
+```
+
+# Conclusion
+
+Overall, the Monte Carlo section is successfully replicated. The reproduced results preserve the authors' principal comparative findings.
+
+The authors' main findings were:
+
+1. Residualizing $Z$ on $X$ improves efficiency; 
+2. Unregularized full-GMM performs poorly with 100 controls; 
+3. DML-IVQR approaches the oracle benchmark while handling high-dimensional controls; 
+4. The theoretically motivated and cross-validated penalty choices have broadly similar performance; 
+5. Weak-identification-robust profile inference remains feasible.
+
+The replication reproduces these qualitative results. Numerical differences remain modest relative to the overall estimator rankings and patterns and are consistent with independent Monte Carlo draws and the newer R/package environment. The strongest evidence comes from Tables 1-3 and Figure 1. Figures 2-4 support the same qualitative inference pattern.

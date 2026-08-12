@@ -1,0 +1,7 @@
+"Component","Version"
+"R","4.6.1"
+"quantreg","6.1"
+"hdm","0.3.2"
+"hqreg","1.4.1"
+"mvtnorm","1.4.2"
+"doSNOW","1.0.20"
