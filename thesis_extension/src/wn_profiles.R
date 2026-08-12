@@ -179,3 +179,66 @@ dml_wn_profile_fixedcv <- function(y, D, X100, Z, tau, grid) {
   }
   .finish_wn_profile(grid, W, status)
 }
+
+# Belloni-Chernozhukov pivotal penalty used by the authors' Table 3 code.
+# The returned vector includes the intercept penalty followed by the slope
+# penalties. For a fixed dataset and tau, callers should compute this once and
+# pass the same vector to every profile evaluation (and every kappa value that
+# shares X and tau).
+bc_pivotal_lambda <- function(X, R = 1000, tau = 0.5, c = 2, alpha = 0.1) {
+  norm2n <- function(z) sqrt(mean(z^2))
+  n <- nrow(X)
+  sigs <- apply(X, 2, norm2n)
+  U <- matrix(runif(n * R), n)
+  R <- (t(X) %*% (tau - (U < tau))) /
+    (sigs * sqrt(tau * (1 - tau)))
+  r <- apply(abs(R), 2, max)
+  c * quantile(r, 1 - alpha) * sqrt(tau * (1 - tau)) * c(1, sigs)
+}
+
+# Grid-invariant Table 3 Belloni-Chernozhukov DML profile. The pivotal penalty
+# is supplied by the caller and is never recomputed inside the alpha loop.
+dml_wn_profile_bc <- function(y, D, X100, Z, tau, grid, lambda_bc) {
+  if (!is.numeric(lambda_bc) || length(lambda_bc) != ncol(X100) + 1L ||
+      any(!is.finite(lambda_bc))) {
+    stop("lambda_bc must be a finite numeric vector of length ncol(X100) + 1.")
+  }
+  W <- rep(NA_real_, length(grid))
+  status <- rep("NOT RUN", length(grid))
+  for (i in seq_along(grid)) {
+    evaluated <- .evaluate_profile_alpha(grid[i], function(alpha) {
+      lasso <- quantreg::rq(
+        y - alpha * D ~ X100,
+        tau = tau,
+        method = "lasso",
+        lambda = lambda_bc
+      )
+      beta <- matrix(lasso$coefficients, ncol = 1)
+      e <- y - alpha * D - cbind(1, X100) %*% beta
+      distribition <- c(dnorm(e, mean(e), var(e)))
+      distribition <- diag(distribition)
+      distribition <- sqrt(distribition)
+      psi <- matrix(0, nrow = length(Z[1, ]), ncol = length(Z[, 1]))
+      for (j in seq_len(length(Z[1, ]))) {
+        delta <- hdm::rlasso(
+          distribition %*% Z[, j] ~ distribition %*% X100,
+          post = FALSE
+        )
+        delta <- matrix(delta$coefficients, ncol = 1)
+        delta <- Z[, j] - cbind(1, X100) %*% delta
+        psi[j, ] <- t(delta)
+      }
+      indicator <- ifelse(e <= 0, 1, 0)
+      g <- psi %*% (tau - indicator)
+      invsigma <- solve(
+        psi %*% diag(diag((tau - indicator) %*% t(tau - indicator))) %*% t(psi)
+      )
+      t(g) %*% invsigma %*% g
+    })
+    W[i] <- evaluated$W
+    status[i] <- evaluated$status
+  }
+  result <- .finish_wn_profile(grid, W, status)
+  result$lambda_bc <- lambda_bc
+  result
+}

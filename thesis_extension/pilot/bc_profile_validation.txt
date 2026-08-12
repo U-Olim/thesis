@@ -1,0 +1,65 @@
+Grid-invariant Belloni-Chernozhukov DML W_N(alpha) validation
+
+R version: R version 3.4.3 (2017-11-30)
+Diagnostic seed: 20260816
+n: 500
+kappa: 1.00
+Grid-invariance tau: 0.50
+Tolerance: 1e-12
+Grid values were canonicalized to one decimal so common alphas are bit-identical.
+
+The Belloni-Chernozhukov pivotal penalty is computed once for each
+dataset and quantile and reused across candidate treatment-effect values.
+All numerical constants and the remaining DML-IVQR implementation follow
+the authors' Table 3 BC implementation.
+
+BC penalty implementation:
+R = 1000; c = 2; alpha = 0.1; empirical quantile = 0.9
+U = matrix(runif(n * R), n)
+sigma_j = sqrt(mean(X_j^2)); intercept multiplier = 1
+The supplied lambda_bc is not recomputed inside dml_wn_profile_bc().
+The interface permits the same lambda_bc to be reused across kappa values
+whenever X and tau are unchanged.
+
+Penalty summary:
+length(lambda_bc): 101
+min(lambda_bc): 33.48228470687622
+median(lambda_bc): 34.99791030536942
+max(lambda_bc): 60.59356516979683
+Exact equality in every returned profile: TRUE
+RNG state unchanged throughout all profile evaluations: TRUE
+Per-profile checks: A_first TRUE; A_second TRUE; B TRUE; C TRUE; alone TRUE; after_lower TRUE; after_higher TRUE
+
+Grid-invariance results:
+                     test n_common_alpha max_abs_W_difference
+              A_same_grid             41                    0
+          B_expanded_grid             41                    0
+          C_reversed_grid             41                    0
+ D_single_alpha_positions              2                    0
+ mean_abs_W_difference exact_match tolerance_match
+                     0        TRUE            TRUE
+                     0        TRUE            TRUE
+                     0        TRUE            TRUE
+                     0        TRUE            TRUE
+
+W_N(1) by evaluation position:
+alone: 5.024508191425869
+after lower alpha values: 5.024508191425869
+after higher alpha values: 5.024508191425869
+
+Baseline BC alpha_hat diagnostics:
+ dataset_id   n tau kappa alpha_hat                min_W n_success n_failure
+          1 500 0.1     1      -0.3 1.331501773103190400        41         0
+          1 500 0.5     1       0.7 2.460382734092453560        41         0
+          1 500 0.9     1       2.0 0.242084498657652913        41         0
+          2 500 0.1     1       0.0 0.007279407127622294        41         0
+          2 500 0.5     1       1.0 0.493127773926992696        41         0
+          2 500 0.9     1       2.2 0.370543118260979409        41         0
+          3 500 0.1     1      -0.3 1.008161727564296894        41         0
+          3 500 0.5     1       0.8 0.075887844929646481        41         0
+          3 500 0.9     1       2.4 2.509095366280512440        41         0
+
+Warnings/errors:
+None.
+
+Overall validation: PASS

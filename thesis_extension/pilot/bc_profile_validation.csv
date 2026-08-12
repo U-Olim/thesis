@@ -1,0 +1,15 @@
+"record_type","estimator","test","dataset_id","n","tau","kappa","n_common_alpha","max_abs_W_difference","mean_abs_W_difference","exact_match","tolerance_match","W_a0_alone","W_a0_after_lower","W_a0_after_higher","alpha_hat","min_W","n_success","n_failure","lambda_length","lambda_min","lambda_median","lambda_max"
+"grid_invariance","DML-IVQR BC","A_same_grid",NA,500,0.5,1,41,0,0,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"grid_invariance","DML-IVQR BC","B_expanded_grid",NA,500,0.5,1,41,0,0,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"grid_invariance","DML-IVQR BC","C_reversed_grid",NA,500,0.5,1,41,0,0,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"grid_invariance","DML-IVQR BC","D_single_alpha_positions",NA,500,0.5,1,2,0,0,TRUE,TRUE,5.02450819142587,5.02450819142587,5.02450819142587,NA,NA,NA,NA,NA,NA,NA,NA
+"penalty_invariance","DML-IVQR BC","same_penalty_every_alpha_grid_and_order",NA,500,0.5,1,247,0,0,TRUE,TRUE,NA,NA,NA,NA,NA,NA,NA,101,33.4822847068762,34.9979103053694,60.5935651697968
+"baseline_alpha_hat","DML-IVQR BC","dataset_1_tau_0.10",1,500,0.1,1,NA,NA,NA,NA,NA,NA,NA,NA,-0.3,1.33150177310319,41,0,101,19.8711048764113,20.8176973430212,36.0205917395582
+"baseline_alpha_hat","DML-IVQR BC","dataset_1_tau_0.50",1,500,0.5,1,NA,NA,NA,NA,NA,NA,NA,NA,0.7,2.46038273409245,41,0,101,33.744665782882,35.3521479343281,61.1693631085374
+"baseline_alpha_hat","DML-IVQR BC","dataset_1_tau_0.90",1,500,0.9,1,NA,NA,NA,NA,NA,NA,NA,NA,2,0.242084498657653,41,0,101,19.94517633317,20.8952973143439,36.1548619635873
+"baseline_alpha_hat","DML-IVQR BC","dataset_2_tau_0.10",2,500,0.1,1,NA,NA,NA,NA,NA,NA,NA,NA,0,0.00727940712762229,41,0,101,20.1553494576592,21.3315111940724,36.8350305888677
+"baseline_alpha_hat","DML-IVQR BC","dataset_2_tau_0.50",2,500,0.5,1,NA,NA,NA,NA,NA,NA,NA,NA,1,0.493127773926993,41,0,101,32.8639468041723,34.7817164176334,60.0607043973922
+"baseline_alpha_hat","DML-IVQR BC","dataset_2_tau_0.90",2,500,0.9,1,NA,NA,NA,NA,NA,NA,NA,NA,2.2,0.370543118260979,41,0,101,19.5301031739684,20.6697787776923,35.6923579681966
+"baseline_alpha_hat","DML-IVQR BC","dataset_3_tau_0.10",3,500,0.1,1,NA,NA,NA,NA,NA,NA,NA,NA,-0.3,1.0081617275643,41,0,101,19.6434384124485,20.6465465477659,35.8343078845089
+"baseline_alpha_hat","DML-IVQR BC","dataset_3_tau_0.50",3,500,0.5,1,NA,NA,NA,NA,NA,NA,NA,NA,0.8,0.0758878449296465,41,0,101,33.5432925026891,35.2562079754433,61.1909506759144
+"baseline_alpha_hat","DML-IVQR BC","dataset_3_tau_0.90",3,500,0.9,1,NA,NA,NA,NA,NA,NA,NA,NA,2.4,2.50909536628051,41,0,101,20.8491482421634,21.9138269291136,38.0338096392526
