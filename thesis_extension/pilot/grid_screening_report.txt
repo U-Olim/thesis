@@ -1,0 +1,79 @@
+Weak-identification wide-grid screening report
+
+R version: R version 3.4.3 (2017-11-30)
+Diagnostic seed: 20260816
+n: 500
+kappa: 0.10
+taus: 0.10, 0.50, 0.90
+estimators: Oracle-GMM, Full-GMM, DML-IVQR
+replications/datasets: 10
+alpha grid: seq(-3, 5, by=0.2); points: 41
+chi-square critical value: 5.99146454710798
+number of profiles: 90
+raw alpha-level rows: 3690
+number of alpha-level failures: 0
+
+DML pivotal-penalty validation:
+lambda_bc generations: 30 (expected 30 )
+all supplied-lambda exact checks: TRUE
+One lambda_bc was generated per replication-tau and reused for all 41 alpha values.
+The same interface permits reuse across kappa when X and tau are unchanged.
+
+Direct reversed-grid validation (replication 1, tau=0.50):
+  estimator max_abs_W_difference exact_match
+ Oracle-GMM                    0        TRUE
+   Full-GMM                    0        TRUE
+   DML-IVQR                    0        TRUE
+
+Counts and observed ranges by tau and estimator:
+ tau estimator  n_profiles n_alpha_failures n_no_accepted n_all_accepted
+ 0.1 Oracle-GMM 10         0                0             5             
+ 0.1 Full-GMM   10         0                0             5             
+ 0.1 DML-IVQR   10         0                0             2             
+ 0.5 Oracle-GMM 10         0                0             7             
+ 0.5 Full-GMM   10         0                0             2             
+ 0.5 DML-IVQR   10         0                0             5             
+ 0.9 Oracle-GMM 10         0                0             6             
+ 0.9 Full-GMM   10         0                0             5             
+ 0.9 DML-IVQR   10         0                0             6             
+ n_left_boundary n_right_boundary n_multiple_components
+ 10               9               5                    
+  8              10               5                    
+  5               9               7                    
+  9               9               3                    
+  8               7               8                    
+  6              10               3                    
+  7              10               3                    
+  9               9               5                    
+  7              10               4                    
+ alpha_hat_range           min_W_range                                
+ -3 to 5                   0.002261904240116508 to 0.32998012494309   
+ -2.2 to 4                 0.00292954418084289 to 0.0788522490819505  
+ -2.8 to 2.600000000000001 0.002427609111519084 to 1.283994283800034  
+ -2.8 to 2.800000000000001 0.003276615141849441 to 0.2422337996454868 
+ 0.4000000000000004 to 3.2 0.01222867694776121 to 0.4914994078494238  
+ -2.4 to 3.2               0.0008302244152833007 to 0.6739503845090927
+ -2.6 to 5                 0.001679144113031739 to 0.5018269835493407 
+ -2.6 to 4.800000000000001 0.0180792796611671 to 0.1688842052571619   
+ -1.2 to 5                 0.01118554606882116 to 0.3187757553469288  
+
+Profiles with no accepted points: 0
+Profiles with all points accepted: 43
+Profiles touching left boundary: 69
+Profiles touching right boundary: 83
+Profiles with multiple accepted components: 43
+
+Plot files:
+C:/Users/User/thesis/thesis_extension/figures/pilot_grid/oracle_gmm_tau_0p10.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_grid/full_gmm_tau_0p10.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_grid/dml_ivqr_tau_0p10.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_grid/oracle_gmm_tau_0p50.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_grid/full_gmm_tau_0p50.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_grid/dml_ivqr_tau_0p50.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_grid/oracle_gmm_tau_0p90.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_grid/full_gmm_tau_0p90.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_grid/dml_ivqr_tau_0p90.pdf
+
+Validation result: PASS
+The acceptance indicator is a preliminary screening diagnostic only;
+no confidence-region length, interpolation, or automatic expansion was computed.

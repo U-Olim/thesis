@@ -1,0 +1,200 @@
+Wide-tail expansion diagnostic
+
+R version: R version 3.4.3 (2017-11-30)
+Diagnostic seed: 20260816
+n: 500
+kappa: 0.10
+taus: 0.10, 0.50, 0.90
+replications: 10
+tail grid: seq(-40,40,by=0.2); points: 401
+critical value: 5.99146454710798
+
+Previous [-3,5] pilot reproduction:
+rows compared: 3690
+key columns exact: TRUE
+statuses exact: TRUE
+acceptance indicators exact: TRUE
+W vector exact after CSV round trip: FALSE
+max absolute W difference: 4.973799150320701e-14
+reproduction tolerance: 1e-12
+reproduction result: PASS
+
+tail evaluations: 36090
+alpha-level failures: 1
+lambda_bc generations: 30 (expected 30)
+all lambda reuse checks: TRUE
+
+Small reversed-grid check:
+  estimator max_abs_W_difference exact_match
+ Oracle-GMM                    0        TRUE
+   Full-GMM                    0        TRUE
+   DML-IVQR                    0        TRUE
+
+Full-range and outer-tail diagnostics by tau and estimator:
+ tau estimator  n_profiles n_left_endpoint_accepted n_right_endpoint_accepted
+ 0.1 Oracle-GMM 10         10                        9                       
+ 0.1 Full-GMM   10         10                        9                       
+ 0.1 DML-IVQR   10          3                        8                       
+ 0.5 Oracle-GMM 10          7                        8                       
+ 0.5 Full-GMM   10          7                        8                       
+ 0.5 DML-IVQR   10          4                        9                       
+ 0.9 Oracle-GMM 10          9                       10                       
+ 0.9 Full-GMM   10         10                       10                       
+ 0.9 DML-IVQR   10          7                        9                       
+ n_any_left_outer n_any_right_outer n_all_full_range n_multiple_components
+ 10               10                3                 7                   
+ 10               10                1                 9                   
+  5                9                1                 9                   
+  9                8                6                 3                   
+ 10               10                2                 8                   
+  7               10                2                 7                   
+ 10               10                5                 5                   
+ 10               10                0                10                   
+  7               10                0                10                   
+ max_components alpha_hat_range                        
+ 30             -27.4 to 35.40000000000001             
+ 52             -27.4 to 38.80000000000001             
+ 29             -0.5999999999999943 to 27.8            
+ 38             -1.799999999999997 to 24.40000000000001
+ 87             -39.2 to 2.600000000000001             
+ 16             -2.399999999999999 to 6.400000000000006
+ 26             -10.2 to 35.60000000000001             
+ 58             -34.6 to 36.80000000000001             
+ 21             -4.600000000000001 to 24.60000000000001
+ min_W_range                                 
+ 0.0003467483005806583 to 0.2065010415577643 
+ 0.000165181067302669 to 0.04669773822808285 
+ 0.002427609111519235 to 0.6273895261737013  
+ 0.0004611671148638734 to 0.2345540638533002 
+ 6.925901848457839e-05 to 0.2155928089176385 
+ 0.0008302244152827422 to 0.6739503845091035 
+ 7.460388888947483e-05 to 0.5463742553348416 
+ 0.0004044474048018073 to 0.01480032842397089
+ 0.01118554606882177 to 0.3187757553469383   
+
+Boundary contact across nested windows:
+ tau estimator  window   left_boundary_count right_boundary_count
+ 0.1 Oracle-GMM [-3,5]   10                   9                  
+ 0.1 Oracle-GMM [-5,5]   10                   9                  
+ 0.1 Oracle-GMM [-10,10] 10                   8                  
+ 0.1 Oracle-GMM [-20,20] 10                   9                  
+ 0.1 Oracle-GMM [-40,40] 10                   9                  
+ 0.1 Full-GMM   [-3,5]    8                  10                  
+ 0.1 Full-GMM   [-5,5]   10                  10                  
+ 0.1 Full-GMM   [-10,10]  9                   9                  
+ 0.1 Full-GMM   [-20,20]  9                   8                  
+ 0.1 Full-GMM   [-40,40] 10                   9                  
+ 0.1 DML-IVQR   [-3,5]    5                   9                  
+ 0.1 DML-IVQR   [-5,5]    3                   9                  
+ 0.1 DML-IVQR   [-10,10]  4                   6                  
+ 0.1 DML-IVQR   [-20,20]  3                   8                  
+ 0.1 DML-IVQR   [-40,40]  3                   8                  
+ 0.5 Oracle-GMM [-3,5]    9                   9                  
+ 0.5 Oracle-GMM [-5,5]    9                   9                  
+ 0.5 Oracle-GMM [-10,10]  8                   8                  
+ 0.5 Oracle-GMM [-20,20]  7                   8                  
+ 0.5 Oracle-GMM [-40,40]  7                   8                  
+ 0.5 Full-GMM   [-3,5]    8                   7                  
+ 0.5 Full-GMM   [-5,5]    9                   7                  
+ 0.5 Full-GMM   [-10,10]  8                   7                  
+ 0.5 Full-GMM   [-20,20] 10                   9                  
+ 0.5 Full-GMM   [-40,40]  7                   8                  
+ 0.5 DML-IVQR   [-3,5]    6                  10                  
+ 0.5 DML-IVQR   [-5,5]    4                  10                  
+ 0.5 DML-IVQR   [-10,10]  2                  10                  
+ 0.5 DML-IVQR   [-20,20]  3                   9                  
+ 0.5 DML-IVQR   [-40,40]  4                   9                  
+ 0.9 Oracle-GMM [-3,5]    7                  10                  
+ 0.9 Oracle-GMM [-5,5]    7                  10                  
+ 0.9 Oracle-GMM [-10,10]  9                  10                  
+ 0.9 Oracle-GMM [-20,20]  9                  10                  
+ 0.9 Oracle-GMM [-40,40]  9                  10                  
+ 0.9 Full-GMM   [-3,5]    9                   9                  
+ 0.9 Full-GMM   [-5,5]   10                   9                  
+ 0.9 Full-GMM   [-10,10]  8                  10                  
+ 0.9 Full-GMM   [-20,20] 10                  10                  
+ 0.9 Full-GMM   [-40,40] 10                  10                  
+ 0.9 DML-IVQR   [-3,5]    7                  10                  
+ 0.9 DML-IVQR   [-5,5]    8                  10                  
+ 0.9 DML-IVQR   [-10,10]  7                  10                  
+ 0.9 DML-IVQR   [-20,20]  6                  10                  
+ 0.9 DML-IVQR   [-40,40]  7                   9                  
+ all_accepted_count
+ 5                 
+ 5                 
+ 5                 
+ 3                 
+ 3                 
+ 6                 
+ 6                 
+ 5                 
+ 2                 
+ 1                 
+ 2                 
+ 2                 
+ 1                 
+ 1                 
+ 1                 
+ 7                 
+ 7                 
+ 7                 
+ 6                 
+ 6                 
+ 2                 
+ 2                 
+ 2                 
+ 2                 
+ 2                 
+ 5                 
+ 2                 
+ 2                 
+ 2                 
+ 2                 
+ 6                 
+ 5                 
+ 5                 
+ 5                 
+ 5                 
+ 2                 
+ 2                 
+ 0                 
+ 0                 
+ 0                 
+ 6                 
+ 6                 
+ 4                 
+ 3                 
+ 0                 
+
+Total discrete accepted components: 1319
+Profiles with multiple components: 68
+Maximum components in one profile: 87
+
+Interpretation labels used:
+no acceptance near search boundary
+tail unresolved within search range
+Rejected endpoints alone are not treated as proof of mathematical boundedness.
+
+Plot files:
+C:/Users/User/thesis/thesis_extension/figures/pilot_tail/oracle_gmm_tau_0p10_full.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_tail/oracle_gmm_tau_0p10_zoom.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_tail/full_gmm_tau_0p10_full.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_tail/full_gmm_tau_0p10_zoom.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_tail/dml_ivqr_tau_0p10_full.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_tail/dml_ivqr_tau_0p10_zoom.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_tail/oracle_gmm_tau_0p50_full.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_tail/oracle_gmm_tau_0p50_zoom.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_tail/full_gmm_tau_0p50_full.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_tail/full_gmm_tau_0p50_zoom.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_tail/dml_ivqr_tau_0p50_full.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_tail/dml_ivqr_tau_0p50_zoom.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_tail/oracle_gmm_tau_0p90_full.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_tail/oracle_gmm_tau_0p90_zoom.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_tail/full_gmm_tau_0p90_full.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_tail/full_gmm_tau_0p90_zoom.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_tail/dml_ivqr_tau_0p90_full.pdf
+C:/Users/User/thesis/thesis_extension/figures/pilot_tail/dml_ivqr_tau_0p90_zoom.pdf
+
+Overall validation: PASS
+No adaptive expansion, interpolation, refinement, final CR length, coverage,
+or power calculation was performed.
