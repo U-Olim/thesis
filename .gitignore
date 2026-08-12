@@ -1,1 +1,31 @@
-/environment/
+# R workspace/state
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+workspace.RData
+
+# Local R package libraries and downloaded package sources
+environment/library/
+environment/legacy_R343_library/
+environment/empty_site_library/
+environment/cran-source/
+environment/renv/library/
+renv/library/
+environment/*.log
+environment/R343.cmd
+
+# Generated simulation outputs
+thesis_extension/results_raw/*
+thesis_extension/results_processed/*
+thesis_extension/figures/*
+
+# Preserve directory structure
+!thesis_extension/results_raw/.gitkeep
+!thesis_extension/results_processed/.gitkeep
+!thesis_extension/figures/.gitkeep
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/settings.json
